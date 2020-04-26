@@ -5,7 +5,7 @@
 
 .row-content{
     margin: 10px auto;
-    padding: 50px 0px;
+    padding: 40px 0px;
     border-bottom: 1px ridge;
     min-height: 400px;
 }
@@ -30,7 +30,7 @@
 }
 
 body{
-    padding: 50px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
     z-index: 0;
 }
 
