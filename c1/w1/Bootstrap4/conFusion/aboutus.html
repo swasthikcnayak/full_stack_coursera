@@ -26,18 +26,13 @@
     />
 
     <link rel="stylesheet" href="styles/styles.css" />
-     <!-- endbuild -->
+    <!-- endbuild -->
   </head>
 
   <body>
     <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
       <div class="container">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#Navbar"
-        >
+        <button class="navbar-toggler" type="button" id="navtogglebutton">
           <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand ml-auto" href="index.html"
@@ -67,48 +62,68 @@
             </li>
           </ul>
           <span class="navbar-text">
-              <a  id="loginbutton">
-                  <span class="fa fa-sign-in"> Login</span>
-              </a>
+            <a id="loginbutton">
+              <span class="fa fa-sign-in"> Login</span>
+            </a>
           </span>
         </div>
       </div>
     </nav>
 
     <div id="loginmodal" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-lg" role="content">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Login</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <div class="modal-dialog modal-lg" role="content">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Login</h4>
+            <button type="button" class="close loginmodalclose">
+              &times;
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-row">
+                <div class="form-group col-sm-4">
+                  <label class="sr-only" for="inputemail">Email address</label>
+                  <input
+                    type="email"
+                    class="form-control mr-1"
+                    id="inputemail"
+                    placeholder="Enter email"
+                  />
                 </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-row">
-                            <div class="form-group col-sm-4">
-                                <label class="sr-only" for="inputemail">Email address</label>
-                                <input type="email" class="form-control from-control-sm mr-1" id="inputemail" placeholder="Enter email">
-                            </div>
-                            <div class="form-group col-sm-4">
-                                <label class="sr-only" for="exampleInputPassword3">Password</label>
-                                <input type="password" class="form-control form-control-sm mr-1" id="exampleInputPassword3" placeholder="Password">
-                            </div>
-                            <div class="col-sm-auto">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox">
-                                    <label class="form-check-label"> Remember me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <button type="button" class="btn btn-secondary btn-sm ml-auto" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary btn-sm ml-1">Sign in</button>        
-                        </div>
-                    </form>
+                <div class="form-group col-sm-4">
+                  <label class="sr-only" for="exampleInputPassword3"
+                    >Password</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control mr-1"
+                    id="exampleInputPassword3"
+                    placeholder="Password"
+                  />
                 </div>
-            </div>
+                <div class="col-sm-auto">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" />
+                    <label class="form-check-label"> Remember me </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-sm ml-auto loginmodalclose"
+                >
+                  Cancel
+                </button>
+                <button type="submit" class="btn btn-primary btn-sm ml-1">
+                  Sign in
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
 
     <header class="jumbotron">
@@ -126,13 +141,18 @@
             <img src="img/logo.png" class="img-fluid" />
           </div>
           <div class="col-12 col-sm align-self-center">
-            <a role="button" class="btn btn-block nav-link btn-warning" 
-            data-toggle="tooltip" data-html="true"
-             title="Or call us at <br><strong>+2309489038</strong>"
-             data-placement="bottom"
-                 href="#"
-              >Reserve a table</a
+            <a
+              role="button"
+              id="bookingbutton"
+              class="mt-2"
+              data-toggle="tooltip"
+              data-html="true"
+              title="Or call us at <br><strong>+2309489038</strong>"
+              data-placement="bottom"
+              href="#"
             >
+              <button class="btn btn-warning btn-block">Reserve Table</button>
+            </a>
           </div>
         </div>
       </div>
@@ -520,6 +540,5 @@
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="scripts/scripts.js"></script>
     <!--endbuild-->
-
-</body>
+  </body>
 </html>

@@ -23,7 +23,21 @@ $(document).ready(function(){
       $(this).attr("data-toggle","modal");
       $(this).attr("data-target","#bookingmodal");
     });
+
+  $("#navtogglebutton").click(function(){
+    $(this).attr('data-toggle','collapse')
+    $(this).attr('data-target','#Navbar')
   });
+
+  $('.loginmodalclose').click(function() {
+    $(this).attr('data-dismiss','modal');
+  });
+
+  $('.bookingmodalclose').click(function() {
+    $(this).attr('data-dismiss','modal');
+  });
+  });
+
 
 /*
 $(document).ready( function(){
