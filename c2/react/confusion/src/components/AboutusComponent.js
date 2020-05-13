@@ -8,20 +8,22 @@ import {
   Media,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../shared/baseUrl";
+import { Loading } from "./LoadingComponent";
 
-function RenderLeader({ leader }) {
+function RenderLeader({ leader}) {
   return (
     <Media className="m-3">
-        <Media left top className='mr-3'>
-            <img src={leader.image} alt={leader.name}/>
+      <Media left top className="mr-3">
+        <img src={baseUrl + leader.image} alt={leader.name} />
+      </Media>
+      <Media body>
+        <Media heading>{leader.name}</Media>
+        <Media subHeading className="mt-2 mb-2">
+          {leader.designation}
         </Media>
-        <Media body>
-            <Media heading>
-                {leader.name}
-            </Media>
-            <Media subHeading className="mt-2 mb-2">{leader.designation}</Media>
-            <p>{leader.description}</p>
-        </Media>
+        <p>{leader.description}</p>
+      </Media>
     </Media>
   );
 }
@@ -30,11 +32,31 @@ function About(props) {
   const leaders = props.leaders.map((leader) => {
     return (
       <>
-        <RenderLeader leader={leader} />
+        <RenderLeader
+          leader={leader}
+        />
       </>
     );
   });
-
+  if (props.isLoading) {
+    return (
+      <div className="container">
+        <div className="row">
+          <Loading />
+        </div>
+      </div>
+    );
+  } else if (props.errMess) {
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <h4>{props.errMess}</h4>
+          </div>
+        </div>
+      </div>
+    );
+  } else {
   return (
     <div className="container">
       <div className="row">
@@ -116,6 +138,7 @@ function About(props) {
       </div>
     </div>
   );
+  }
 }
 
 export default About;
