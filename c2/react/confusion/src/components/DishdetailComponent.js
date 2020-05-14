@@ -15,10 +15,11 @@ import {
   Col,
   Label,
 } from "reactstrap";
+import { FadeTransform, Fade, Stagger } from "react-animation-components";
 import { Link } from "react-router-dom";
 import { LocalForm, Control, Errors } from "react-redux-form";
 import { Loading } from "./LoadingComponent";
-import {baseUrl} from '../shared/baseUrl';
+import { baseUrl } from "../shared/baseUrl";
 
 const required = (val) => val && val.length;
 const minLength = (len) => (val) => val && val.length > len;
@@ -71,19 +72,14 @@ class CommentForm extends Component {
                   id="rating"
                   className="form-control"
                 >
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
+                  <option> 1 </option> <option> 2 </option> <option> 3 </option>
+                  <option> 4 </option> <option> 5 </option>
                 </Control.select>
               </Row>
-
               <Row className="form-group">
                 <Label htmlFor="name" md={4}>
                   Your Name
                 </Label>
-
                 <Control.text
                   model=".name"
                   id="name"
@@ -106,7 +102,6 @@ class CommentForm extends Component {
                   }}
                 />
               </Row>
-
               <Row className="form-group">
                 <Label htmlFor="comments" md={4}>
                   Comments
@@ -118,7 +113,6 @@ class CommentForm extends Component {
                   className="form-control"
                 />
               </Row>
-
               <Row className="form-group">
                 <Col md={{ size: 10 }}>
                   <Button type="submit" color="primary">
@@ -130,7 +124,7 @@ class CommentForm extends Component {
           </ModalBody>
         </Modal>
         <Button outline color="secondary" onClick={this.toggleCommentForm}>
-          <span className="fa fa-pencil"> Submit Comment</span>
+          <span className="fa fa-pencil"> Submit Comment </span>
         </Button>
       </>
     );
@@ -140,16 +134,23 @@ class CommentForm extends Component {
 function RenderDish({ dish }) {
   if (dish != null) {
     return (
-      <Card>
-        <CardImg top src={baseUrl+dish.image} alt={dish.name} />
-        <CardBody>
-          <CardTitle>{dish.name}</CardTitle>
-          <CardText>{dish.description}</CardText>
-        </CardBody>
-      </Card>
+      <FadeTransform
+        in
+        transformProps={{
+          exitTransform: "scale(0.5) translateY(-50%)",
+        }}
+      >
+        <Card>
+          <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+          <CardBody>
+            <CardTitle> {dish.name} </CardTitle>
+            <CardText> {dish.description} </CardText>
+          </CardBody>
+        </Card>
+      </FadeTransform>
     );
   } else {
-    return <div></div>;
+    return <div> </div>;
   }
 }
 
@@ -157,33 +158,35 @@ function Rendercomments({ comments, postComment, dishId }) {
   if (comments != null) {
     const list = comments.map((comment) => {
       return (
-        <li key={comment.id}>
-          <div>
-            <p>{comment.comment}</p>
-            <p>
-              --{comment.author},
-              {new Intl.DateTimeFormat("en-US", {
-                year: "numeric",
-                month: "short",
-                day: "2-digit",
-              }).format(new Date(Date.parse(comment.date)))}
-            </p>
-          </div>
-        </li>
+        <Fade in>
+          <li key={comment.id}>
+            <div>
+              <p> {comment.comment} </p>
+              <p>
+                --{comment.author},
+                {new Intl.DateTimeFormat("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "2-digit",
+                }).format(new Date(Date.parse(comment.date)))}
+              </p>
+            </div>
+          </li>
+        </Fade>
       );
     });
 
     return (
       <div>
-        <h4>Comments</h4>
+        <h4> Comments </h4>
         <ul className="list-unstyled">
-          {list}
+          <Stagger in>{list}</Stagger>
           <CommentForm dishId={dishId} postComment={postComment} />
         </ul>
       </div>
     );
   } else {
-    return <div></div>;
+    return <div> </div>;
   }
 }
 
@@ -200,7 +203,7 @@ const Dishdetail = (props) => {
     return (
       <div className="container">
         <div className="row">
-          <h4>{props.errMess}</h4>
+          <h4> {props.errMess} </h4>
         </div>
       </div>
     );
@@ -210,13 +213,12 @@ const Dishdetail = (props) => {
         <div className="row">
           <Breadcrumb>
             <BreadcrumbItem>
-              <Link to="/menu">Menu</Link>
+              <Link to="/menu"> Menu </Link>
             </BreadcrumbItem>
-            <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+            <BreadcrumbItem active> {props.dish.name} </BreadcrumbItem>
           </Breadcrumb>
           <div className="col-12">
-            <h3>{props.dish.name}</h3>
-            <hr />
+            <h3> {props.dish.name} </h3> <hr />
           </div>
         </div>
         <div className="row">
