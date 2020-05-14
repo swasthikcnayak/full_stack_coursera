@@ -45,14 +45,8 @@ const mapDispatchToProps = (dispatch) => ({
   fetchLeaders: () => {
     dispatch(fetchLeaders());
   },
-  postFeedback: (
-    values
-  ) => {
-    dispatch(
-      postFeedback(
-        values
-      )
-    );
+  postFeedback: (values) => {
+    dispatch(postFeedback(values));
   },
   resetFeedbackForm: () => {
     dispatch(actions.reset("feedback"));
@@ -60,10 +54,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.fetchDishes();
     this.props.fetchComments();

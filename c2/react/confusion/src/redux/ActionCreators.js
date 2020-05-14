@@ -209,17 +209,15 @@ export const addLeaders = (leaders) => ({
 
 //////////////////////////
 
-
-
-export const postFeedback = (values) => (dispatch) => {
+export const postFeedback = (feedback) => (dispatch) => {
   const newFeedback = {
-    "firstname":values.firstname,
-     "lastname" :values.lastname,
-     "telnum": values.telnum,
-     "email": values.email,
-      "agree":values.agree,
-      "contectType":values.contactType,
-      "message":values.message,
+    firstname: feedback.firstname,
+    lastname: feedback.lastname,
+    telnum: feedback.telnum,
+    email: feedback.email,
+    agree: feedback.agree,
+    contactType: feedback.contactType,
+    message: feedback.message,
   };
   newFeedback.date = new Date().toISOString();
 
@@ -244,13 +242,22 @@ export const postFeedback = (values) => (dispatch) => {
         }
       },
       (error) => {
-        throw error;
+        var errorMessage = new Error(error.errorMessage);
+        throw errorMessage;
       }
     )
     .then((response) => response.json())
-    .then((response) => dispatch(alert("Thank you for your feedback! \n"+JSON.stringify(response))))
+    .then((response) => {
+      alert("Thank you for your feedback!\n" + JSON.stringify(response));
+      return response;
+    })
     .catch((error) => {
-      console.log("post feedback", error.message);
-      alert("Your Feedback could not be posted\nError: " + error.message);
+      console.log("Post feedback: " + error.message);
+      alert("Feedback could not be posted:\n" + error.message);
     });
 };
+
+export const addFeedback = (feedback) => ({
+  type: ActionTypes.ADD_FEEDBACK,
+  payload: feedback,
+});

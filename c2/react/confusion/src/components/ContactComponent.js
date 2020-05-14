@@ -8,7 +8,7 @@ import {
   Button,
   Row,
 } from "reactstrap";
-import { Control, Form, Errors,actions } from "react-redux-form";
+import { Control, Form, Errors } from "react-redux-form";
 import { Link } from "react-router-dom";
 
 const required = (val) => val && val.length;
@@ -22,15 +22,12 @@ class Contact extends Component {
   constructor(props) {
     super(props);
     this.resetFeedbackForm = this.props.resetFeedbackForm.bind(this);
-    this.handleSubmit = this.props.postFeedback.bind(this);
-    
+    this.postFeedback = this.props.postFeedback.bind(this);
   }
 
   handleSubmit(values) {
-    console.log("Current State is: " + JSON.stringify(values)); 
-    this.props.postFeedback(
-     values
-    );
+    console.log("Current State is: " + JSON.stringify(values));
+    this.props.postFeedback(values);
     this.props.resetFeedbackForm();
   }
 
@@ -88,7 +85,7 @@ class Contact extends Component {
               >
                 <i className="fa fa-phone"></i> Call
               </a>
-              <a role="button" className="btn btn-info">
+              <a role="button"  href ="https://www.skype.com/en/" className="btn btn-info">
                 <i className="fa fa-skype"></i> Skype
               </a>
               <a
@@ -106,7 +103,10 @@ class Contact extends Component {
             <h3>Send us Your Feedback</h3>
           </div>
           <div className="col-12 com-md-9">
-            <Form model="feedback" onSubmit={(values) => this.handleSubmit(values)}>
+            <Form
+              model="feedback"
+              onSubmit={(values) => this.handleSubmit(values)}
+            >
               <Row className="form-group">
                 <Label htmlFor="firstname" md={2}>
                   First Name
@@ -278,197 +278,3 @@ class Contact extends Component {
 }
 
 export default Contact;
-
-{
-  /* <Form onSubmit={this.handleSubmit}>
-              <FormGroup row>
-                <Label htmlFor="firstname" md={2}>
-                  First Name
-                </Label>
-                <Col md={10}>
-                  <Input
-                    type="text"
-                    id="firstname"
-                    name="firstname"
-                    placeholder="First Name"
-                    value={this.state.firstname}
-                    valid={errors.firstname === ""}
-                    invalid={errors.firstname !== ""}
-                    onChange={this.handleInputChange}
-                    onBlur={this.handleBlur("firstname")}
-                  />
-                  <FormFeedback>{errors.firstname}</FormFeedback>
-                </Col>
-              </FormGroup>
-              <FormGroup row>
-                <Label htmlFor="lastname" md={2}>
-                  Last Name
-                </Label>
-                <Col md={10}>
-                  <Input
-                    type="text"
-                    id="lastname"
-                    name="lastname"
-                    placeholder="Last Name"
-                    value={this.state.lastname}
-                    valid={errors.lastname === ""}
-                    invalid={errors.lastname !== ""}
-                    onChange={this.handleInputChange}
-                    onBlur={this.handleBlur("lastname")}
-                  />
-                  <FormFeedback>{errors.lastname}</FormFeedback>
-                </Col>
-              </FormGroup>
-              <FormGroup row>
-                <Label htmlFor="telnum" md={2}>
-                  Contact. Tel
-                </Label>
-                <Col md={10}>
-                  <Input
-                    type="tel"
-                    id="telnum"
-                    name="telnum"
-                    placeholder="Tel. Number"
-                    value={this.state.telnum}
-                    valid={errors.telnum === ""}
-                    invalid={errors.telnum !== ""}
-                    onBlur={this.handleBlur("telnum")}
-                    onChange={this.handleInputChange}
-                  />
-                  <FormFeedback>{errors.telnum}</FormFeedback>
-                </Col>
-              </FormGroup>
-              <FormGroup row>
-                <Label htmlFor="email" md={2}>
-                  Email
-                </Label>
-                <Col md={10}>
-                  <Input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="Email"
-                    value={this.state.email}
-                    valid={errors.email === ""}
-                    invalid={errors.email !== ""}
-                    onBlur={this.handleBlur("email")}
-                    onChange={this.handleInputChange}
-                  />
-                  <FormFeedback>{errors.email}</FormFeedback>
-                </Col>
-              </FormGroup>
-              <FormGroup row>
-                <Col md={{ size: 6, offset: 2 }}>
-                  <FormGroup check>
-                    <Label check>
-                      <Input
-                        type="checkbox"
-                        name="agree"
-                        checked={this.state.agree}
-                        onChange={this.handleInputChange}
-                      />{" "}
-                      <strong>May we contact you</strong>
-                    </Label>
-                  </FormGroup>
-                </Col>
-                <Col md={{ size: 3, offset: 1 }}>
-                  <Input
-                    type="select"
-                    name="contactType"
-                    value={this.state.contactType}
-                    onChange={this.handleInputChange}
-                  >
-                    <option>Email</option>
-                    <option>Tel.</option>
-                  </Input>
-                </Col>
-              </FormGroup>
-              <FormGroup row>
-                <Label htmlFor="message" md={2}>
-                  Your Feedback
-                </Label>
-                <Col md={10}>
-                  <Input
-                    type="textarea"
-                    id="message"
-                    name="message"
-                    rows="12"
-                    value={this.state.message}
-                    onChange={this.handleInputChange}
-                  />
-                </Col>
-              </FormGroup>
-              <FormGroup row>
-                <Col md={{ size: 10, offset: 2 }}>
-                  <Button type="submit" color="primary">
-                    Submit Feedback
-                  </Button>
-                </Col>
-              </FormGroup>
-            </Form> */
-}
-
-// handleBlur = (field) => (event) => {
-//   this.setState({ touched: { ...this.state.touched, [field]: true } });
-// };
-
-// validate(firstname, lastname, telnum, email) {
-//   const errors = {
-//     firstname: "",
-//     lastname: "",
-//     telnum: "",
-//     email: "",
-//   };
-
-//   if (this.state.touched.firstname && firstname.length < 3)
-//     errors.firstname = "First Name should be > 3 characters";
-//   else if (firstname.length > 10)
-//     errors.firstname = "First Name should be < 10 charactes";
-
-//   if (this.state.touched.lastname && lastname.length < 3)
-//     errors.lastname = "Last Name should be > 3 characters";
-//   else if (lastname.length > 10)
-//     errors.lastname = "Last Name should be < 10 charactes";
-
-//   const reg = /^\d+$/;
-
-//   if (this.state.touched.telnum && !reg.test(telnum))
-//     errors.telnum = "Tel. Number should contain only numbers";
-
-//   if (
-//     this.state.touched.emial &&
-//     email.split("").filter((x) => x === "@").length != 1
-//   )
-//     errors.email = "Email should contain a @ sign";
-
-//   return errors;
-// }
-
-// handleInputChange(event) {
-//   const target = event.target;
-//   const value = target.type === "checkbox" ? target.checked : target.value;
-//   const name = target.name;
-
-//   this.setState({
-//     [name]: value,
-//   });
-// }
-
-// this.state = {
-//   firstname: "",
-//   lastname: "",
-//   telnum: "",
-//   email: "",
-//   agree: false,
-//   contactType: "Tel.",
-//   message: "",
-//   touched: {
-//     firstname: false,
-//     lastname: false,
-//     telnum: false,
-//     emial: false,
-//   },
-// };
-
-//this.handleInputChange = this.handleInputChange.bind(this);
-// this.handleBlur = this.handleBlur.bind(this);

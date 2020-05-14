@@ -201,6 +201,14 @@
       "comment": "It's your birthday, we're gonna party!",
       "author": "25 Cent",
       "date": "2011-12-02T17:57:28.556094Z"
+    },
+    {
+      "dishId": 1,
+      "rating": "3",
+      "author": "swasthik nayak",
+      "comment": "Moderate",
+      "date": "2020-05-14T17:27:33.293Z",
+      "id": 20
     }
   ],
   "promotions": [
@@ -265,136 +273,15 @@
       "id": 1
     },
     {
-      "firstname": "swasthik",
-      "lastname": "nayak",
-      "telnum": "7019278256",
-      "email": "Swasthik0304@gmail.com",
-      "agree": true,
-      "contectType": "Email",
-      "message": "Not as good as woodlands",
-      "date": "2020-05-14T15:34:02.313Z",
-      "id": 2
-    },
-    {
       "firstname": "Chandrakanth",
       "lastname": "nayak",
-      "telnum": "234234234",
-      "email": "Swasthik0304@gmail.com",
-      "agree": true,
-      "contectType": "Tel.",
-      "message": "dfsdsfdsfdsfsdfsdf",
-      "date": "2020-05-14T15:35:24.899Z",
-      "id": 3
-    },
-    {
-      "firstname": "dsf",
-      "lastname": "dfsd",
-      "telnum": "324324324",
-      "email": "Swasthik0304@gmail.com",
-      "agree": false,
-      "contectType": "Tel.",
-      "message": "dsfasdfsdfsdfs",
-      "date": "2020-05-14T15:38:44.884Z",
-      "id": 4
-    },
-    {
-      "firstname": "dsfdsf",
-      "lastname": "dfssdf",
-      "telnum": "14234324",
-      "email": "Swasthik0304@gmail.com",
-      "agree": false,
-      "contectType": "Tel.",
-      "message": "dfsdfsdfsdfsdf",
-      "date": "2020-05-14T15:41:36.295Z",
-      "id": 5
-    },
-    {
-      "firstname": "sdfasdf",
-      "lastname": "sdfsdfsdf",
-      "telnum": "3214324132",
-      "email": "Swasthik0304@gmail.com",
-      "agree": false,
-      "contectType": "Tel.",
-      "message": "sdfsdfdsfds",
-      "date": "2020-05-14T15:42:13.681Z",
-      "id": 6
-    },
-    {
-      "firstname": "Chandrakanth",
-      "lastname": "nayak",
-      "telnum": "324123432",
-      "email": "swasthik.nayak@learner.manipal.edu",
-      "agree": false,
-      "contectType": "Tel.",
-      "message": "dsfsqdfdfewr",
-      "date": "2020-05-14T15:42:53.711Z",
-      "id": 7
-    },
-    {
-      "firstname": "Chandrakanth",
-      "lastname": "nayak",
-      "telnum": "1342343242",
-      "email": "swasthik.nayak@learner.manipal.edu",
-      "agree": false,
-      "contectType": "Tel.",
-      "message": "dsfasdfdsaadfsd",
-      "date": "2020-05-14T15:44:08.183Z",
-      "id": 8
-    },
-    {
-      "firstname": "swasthik",
-      "lastname": "nayak",
-      "telnum": "4543243545",
-      "email": "swasthik.nayak@learner.manipal.edu",
-      "agree": false,
-      "contectType": "Tel.",
-      "message": "gdfgdfgdf",
-      "date": "2020-05-14T15:45:48.496Z",
-      "id": 9
-    },
-    {
-      "firstname": "dsfad",
-      "lastname": "adsf",
       "telnum": "23432432",
-      "email": "swasthik.nayak@learner.manipal.edu",
-      "agree": false,
-      "contectType": "Tel.",
-      "message": "dsfsdfsdfdsf",
-      "date": "2020-05-14T15:50:59.895Z",
-      "id": 10
-    },
-    {
-      "firstname": "Chandrakanth",
-      "lastname": "nayak",
-      "telnum": "1342343242",
       "email": "Swasthik.nayak@learner.manipal.edu",
       "agree": false,
-      "contectType": "Tel.",
-      "message": "sdfsdfsdfsdf",
-      "date": "2020-05-14T15:51:31.694Z",
-      "id": 11
-    },
-    {
-      "firstname": "sdf",
-      "lastname": "adsf",
-      "telnum": "13432423",
-      "email": "swasthik0304@gmail.com",
-      "agree": false,
-      "contectType": "Tel.",
-      "message": "fsdfsddsf",
-      "date": "2020-05-14T16:05:53.939Z",
-      "id": 12
-    },
-    {
-      "firstname": "Chandrakanth",
-      "lastname": "nayak",
-      "telnum": "13324321",
-      "email": "swasthik.nayak@learner.manipal.edu",
-      "agree": false,
-      "contectType": "Tel.",
-      "message": "dsfadsf",
-      "date": "2020-05-14T16:06:35.932Z",
-      "id": 13
+      "contactType": "Tel.",
+      "message": "dsfdsfdsf",
+      "date": "2020-05-14T17:28:02.247Z",
+      "id": 2
     }
   ]
 }
