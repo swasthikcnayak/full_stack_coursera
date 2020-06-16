@@ -12,14 +12,14 @@ $(document).ready(function () {
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
 });
+
 $(document).ready(function(){
   $("#loginbutton").click(function () {  
     $(this).attr("data-toggle","modal");
     $(this).attr("data-target","#loginmodal");        
   });
 
-
-  $('#bookingbuton').click(function () {
+  $('#bookingbutton').click(function () {
       $(this).attr("data-toggle","modal");
       $(this).attr("data-target","#bookingmodal");
     });

@@ -83,7 +83,7 @@
           </div>
           <div class="modal-body">
             <form action="">
-              <div class="form-row">
+              
                 <div class="form-group row">
                   <label for="guests" class="col-12 form-label col-md-3 "
                     >Number of Guests</label
@@ -152,8 +152,8 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="section" class="col-12 col-md-2 form-label">Section</label>
-                  <div class="btn-group btn-group-toggle col-12 col-md-9 offset-md-1 " data-toggle="buttons">
+                  <label for="section" class="col-12 col-md-3 form-label">Section</label>
+                  <div class="btn-group btn-group-toggle col-12 col-md-6 ml-1 " data-toggle="buttons">
                     <label class="btn btn-success active">
                         <input type="radio" name="section" id="smoking" autocomplete="off" checked>
                         Non-Smoking
@@ -166,7 +166,7 @@
               </div>
 
                 <div class="form-group row ">
-                  <label for="date" class="col-12 col-md-2 form-label"
+                  <label for="date" class="col-12 col-md-3 form-label"
                     >Date and Time</label
                   >
                   <div class="col-12 col-md-4">
@@ -192,7 +192,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              
               
               <div class="form-row">
                 <button
@@ -255,8 +255,7 @@
               <div class="form-row">
                 <button
                   type="button"
-                  class="btn btn-secondary btn-sm ml-auto loginmodalclose"
-                  
+                  class="btn btn-secondary btn-sm ml-auto loginmodalclose"  
                 >
                   Cancel
                 </button>
@@ -285,7 +284,7 @@
             <img src="img/logo.png" class="img-fluid" />
           </div>
           <div class="col-12 col-sm align-self-center mt-2">
-            <a id="bookingbuton"
+            <a id="bookingbutton"
               ><button class="btn btn-warning btn-block">Reserve Table</button>
             </a>
             
@@ -473,7 +472,7 @@
           </div>
         </div>
       </div>
-
+<!--
       <div class="row justify-content-center" id="formbottom">
         <div class="col-sm-8">
           <div class="card" id="reservationform">
@@ -547,7 +546,7 @@
                   </div>
                 </div>
 
-                <div class="form-group row">
+             <div class="form-group row">
                   <label for="date" class="col-12 col-md-2 form-label"
                     >Date and Time</label
                   >
@@ -585,7 +584,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->   
     </div>
 
     <footer class="footer">
@@ -658,6 +657,18 @@
     <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="scripts/scripts.js"></script>
-    <!--endbuild-->
+
+    <script>
+      $(document).ready(function(){
+  $("#loginbutton").click(function () {  
+    $(this).attr("data-toggle","modal");
+    $(this).attr("data-target","#loginmodal");        
+  });
+
+  $('#bookingbutton').click(function () {
+      $(this).attr("data-toggle","modal");
+      $(this).attr("data-target","#bookingmodal");
+    });});    </script>     <!--endbuild-->
+
   </body>
 </html>
