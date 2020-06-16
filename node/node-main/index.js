@@ -1,55 +1,55 @@
-const http = require('http');
-const hostname = 'localhost';
-const port= '3000';
-const fs = require('fs')
-const path = require('path')
+const http = require("http");
+const hostname = "localhost";
+const port = "3000";
+const fs = require("fs");
+const path = require("path");
 
-const server = http.createServer((req,res) => {
-   console.log('Request for '+req.url+' by method '+req.method)
-    if(req.method == 'GET')
+const server = http.createServer((req,res) =>
+{
+    if(req.method=='GET')
     {
-        var fileURl;
+        var fileurl;
         if(req.url == '/')
-            fileURl = '/index.html';
-        else 
-            fileURl = req.url;
-
-        var filePATH = path.resolve('./public'+fileURl);
-        const fileExt = path.extname(filePATH);
-        if(fileExt == '.html')
+            fileurl = '/index.html'
+        else
+            fileurl = req.url;
+        var filepath = path.resolve('./public')+fileurl;
+        var fileext = path.extname(filepath);
+        if(fileext == '.html')
         {
-            fs.exists(filePATH,(exists)=>
+            fs.exists(filepath,(exists)=>
             {
                 if(!exists)
                 {
-                    res.statusCode = '404';
-                    res.setHeader('Content-type','text/html');
-                    res.end('<html><body><h1>Error 404: '+fileURl+' not found</h1></body></html>')
-                    return;
+                    res.statusCode='404';
+                    res.setHeader('content-type','text/html');
+                    res.end('<html><body><h1>The desired file is not found </h1></body></html>')
+                
                 }
-                res.statusCode = 200;
-                res.setHeader('Content-type','text/html');
-                fs.createReadStream(filePATH).pipe(res);
-            });
+                else
+                {
+                    res.statusCode = '200';
+                    res.setHeader('content-type','text/html');
+                    fs.createReadStream(filepath).pipe(res);
+                }
+            })
         }
-        else{
-            res.statusCode = '404';
-            res.setHeader('Content-type','text/html');
-            res.end('<html><body><h1>Error 404: '+fileURl+' is not of html format</h1></body></html>')
-            return;
+        else
+        {
+            res.statusCode='404';
+            res.setHeader('content-type','text/html');
+            res.end('<html><body><h1>Only html files can be served</h1></body></html>')
+     
         }
     }
-    else{
-
-        res.statusCode = '404';
-        res.setHeader('Content-type','text/html');
-        res.end('<html><body><h1>Error 404: '+req.method+' is not supported</h1></body></html>')
-        return;
+    else
+    {
+        res.statusCode='404';
+        res.setHeader('content-type','text/html');
+        res.end('<html><body><h1>Only GET request can be served</h1></body></html>')
     }
 })
 
-server.listen(port,hostname,()=>
-{
-    console.log(`Server is setup and running at http://${hostname}:${port}`)
-})
-
+server.listen(port, hostname, () => {
+  console.log(`Server is setup and running at http://${hostname}:${port}`);
+});
