@@ -1,51 +1,75 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+
+
+const Promotions = require('../models/promotions');
+const promotions = require("../models/promotions");
+const dishRouter = require("./dishRouter");
 const promoRouter = express.Router();
 promoRouter.use(bodyParser.json());
 
-
-
 promoRouter
-.route("/")
-.all((req, res, next) => {
-  res.statusCode = 200;
-  res.setHeader("content-type", "plain/text");
-  next();
-})
+  .route("/")
 
-.get((req, res, next) => {
-  res.end("Will send the details of the promtions to you");
-})
+  .get((req, res, next) => {
+    Promotions.find({})
+      .then((promotion) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(promotion)
+      }, (err) =>
+        next(err))
+      .catch((err) => next(err))
+  })
 
-.post((req, res, next) => {
-  res.end(
-    "Will add the promotions with name " +
-      req.body.name +
-      " and with details " +
-      req.body.description
-  );
-})
-.put((req, res, next) => {
-  res.statusCode = 403;
-  res.end("put operation is not supported on promotions");
-})
+  .post((req, res, next) => {
+    Promotions.create(req.body)
+      .then((promotion) => {
+        console.log('promotion created ' + promotion);
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(promotion);
+      }, (err) => next(err))
+      .catch((err) => next(err))
+  })
 
-.delete((req, res, next) => {
-  res.end("deleting all promotions");
-});
+  .put((req, res, next) => {
+    res.statusCode = 404;
+    res.end("put operation is not supported on /promotions");
+  })
+
+  .delete((req, res, next) => {
+    Promotions.remove({})
+      .then((response) => {
+        console.log('Deleting all the promotions');
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(response);
+      }, (err) => next(err))
+      .catch((err) => next(err))
+  });
 
 promoRouter
   .route('/:promoId')
 
-  .all((req,res,next)=>
-  {
-      res.statusCode = 200;
-      res.setHeader('content-type','text/plain');
-      next();
-  })
   .get((req, res, next) => {
-    res.end("Will send details of the promotions " + req.params.promoId + " to you");
+    Promotions.findById(req.params.promoId)
+      .then((promotion) => {
+        if (promotion != null) {
+          res.statusCode = 200;
+          res.setHeader('Content-Type', 'application/json');
+          res.json(promotion)
+        }
+        else {
+          err = new Error("Promotion " + req.params.promoId + " not found");
+          err.statusCode = 404;
+          return next(err);
+        }
+      }, (err) =>
+        next(err))
+      .catch((err) => next(err))
   })
+  
 
   .post((req, res, next) => {
     res.statusCode = 403;
@@ -53,18 +77,49 @@ promoRouter
   })
 
   .put((req, res, next) => {
-    res.write("Updating the promotions" + req.params.promoId + "\n");
-    res.end(
-      "Will update  the promotions with " +
-        req.body.name +
-        " with details " +
-        req.body.description
-    );
+    Promotions.findById(req.params.promoId)
+      .then((promotion) => {
+        if (promotion != null) {
+          if (req.body.name)
+            promotion.name = req.body.name;
+          if (req.body.image)
+            promotion.image = req.body.image;
+          if (req.body.label)
+            promotion.label = req.body.label;
+          if (req.body.price)
+            promotion.price = req.body.price;
+          if (req.body.description)
+            promotion.description = req.body.description;
+          if (req.body.featured)
+            promotion.featured = req.body.featured;
+          promotion.save()
+            .then((promotion) => {
+              res.statusCode = 200;
+              res.setHeader('Content-Type', 'application/json');
+              res.json(promotion);
+            }, (err) =>
+              next(err));
+        }
+        else {
+          err = new Error("Promotion " + req.params.promoId + " not found");
+          err.statusCode = 404;
+          return next(err);
+        }
+      }, (err) =>
+        next(err))
+      .catch((err) => next(err))
   })
 
   .delete((req, res, next) => {
-    res.end("Deleting promotions : " + req.params.promoId);
-  });
+    Promotions.findByIdAndRemove(req.params.promoId)
+      .then((promotion) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(promotion);
+      }, (err) =>
+        next(err))
+      .catch((err) => next(err))
+  })
 
 
 

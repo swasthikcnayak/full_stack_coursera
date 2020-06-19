@@ -93,8 +93,6 @@ dishRouter
   });
 
 
-/*____________________*/
-
 
 
 
@@ -238,7 +236,7 @@ dishRouter
     Dishes.findById(req.params.dishId)
       .then((dish) => {
         if (dish != null && dish.comments.id(req.params.commentId) != null) {
-            dish.comments.id(req.params.commentId).remove();
+          dish.comments.id(req.params.commentId).remove();
           dish.save()
             .then((dish) => {
               res.statusCode = 200;
@@ -246,7 +244,7 @@ dishRouter
               res.json(dish);
             }, (err) =>
               next(err));
-        }  else if (dish == null) {
+        } else if (dish == null) {
           err = new Error("Dish " + req.params.dishId + " not found");
           err.statusCode = 404;
           return next(err);
