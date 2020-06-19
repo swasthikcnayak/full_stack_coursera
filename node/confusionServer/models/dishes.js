@@ -34,26 +34,26 @@ const dishSchema = new Schema({
         required: true,
 
     },
-    image:{
-        type:String,
-        required:true
+    image: {
+        type: String,
+        required: true
     },
-    category:{
-        type:String,
-        required:true
+    category: {
+        type: String,
+        required: true
     },
-    label:{
-type:String,
-default:''
+    label: {
+        type: String,
+        default: ''
     },
-    price:{
-        type:Currency,
-        min:0,
-        required:true
+    price: {
+        type: Currency,
+        min: 0,
+        required: true
     },
-    featured:{
-        type:Boolean,
-        default:false
+    featured: {
+        type: Boolean,
+        default: false
     },
     comments: [commentSchema]
 },
