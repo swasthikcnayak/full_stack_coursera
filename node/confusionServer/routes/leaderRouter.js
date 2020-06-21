@@ -1,46 +1,71 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+
+const Leaders = require("../models/leaders");
+const promotions = require("../models/promotions");
 const leaderRouter = express.Router();
 leaderRouter.use(bodyParser.json());
 
 
 
 leaderRouter
-.route("/")
+  .route("/")
 
-.get((req, res, next) => {
-  res.end("Will send the details of the leader to you");
-})
+  .get((req, res, next) => {
+    Leaders.find({})
+      .then((leader) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(leader);
+      })
+      .catch((err) =>
+        next(err))
+  })
 
-.post((req, res, next) => {
-  res.end(
-    "Will add the leader with name " +
-      req.body.name +
-      " and with details " +
-      req.body.description
-  );
-})
-.put((req, res, next) => {
-  res.statusCode = 403;
-  res.end("put operation is not supported on leaders");
-})
+  .post((req, res, next) => {
+    Leaders.create(req.body)
+      .then((leader) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(leader);
+      }, (err) => next(err))
+      .catch((err) => next(err))
+  })
 
-.delete((req, res, next) => {
-  res.end("deleting all leaders");
-});
+  .put((req, res, next) => {
+    res.statusCode = 403;
+    res.end("put operation is not supported on /leaders");
+  })
+
+  .delete((req, res, next) => {
+    Leaders.remove({})
+      .then((leader) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'applicatoin/json');
+        res.json(leader);
+      }, (err) => next(err))
+      .catch((err) => next(err))
+  });
 
 
 leaderRouter
   .route('/:leaderId')
 
-  .all((req,res,next)=>
-  {
-      res.statusCode = 200;
-      res.setHeader('content-type','text/plain');
-      next();
-  })
   .get((req, res, next) => {
-    res.end("Will send details of the leader " + req.params.leaderId + " to you");
+    Leaders.findById(req.params.leaderId)
+      .then((leader) => {
+        if (leader != null) {
+          res.statusCode = 200;
+          res.setHeader('Content-Type', 'application/json');
+          res.json(leader);
+        }
+        else {
+          err = new Error("Leaders " + req.params.leaderId + " not found");
+          err.statusCode = 404;
+          return next(err);
+        }
+      }, (err) => next(err))
+      .catch((err) => next(err))
   })
 
   .post((req, res, next) => {
@@ -49,17 +74,45 @@ leaderRouter
   })
 
   .put((req, res, next) => {
-    res.write("Updating the leader " + req.params.leaderId + "\n");
-    res.end(
-      "Will update  the leader with " +
-        req.body.name +
-        " with details " +
-        req.body.description
-    );
+    Leaders.findById(req.params.leaderId)
+      .then((leader) => {
+        if (leader != null) {
+          if (req.body.name)
+            leader.name = req.body.name;
+          if (req.body.image)
+            leader.image = req.body.image;
+          if (req.body.designation)
+            leader.designation = req.body.designation;
+          if (req.body.abbr)
+            leader.abbr = req.body.abbr;
+          if (req.body.description)
+            leader.description = req.body.description;
+          if (req.body.featured)
+            leader.featured = req.body.featured;
+          leader.save()
+            .then((leader) => {
+              res.statusCode = 200;
+              res.setHeader('Content-Type', 'application/json');
+              res.json(leader);
+            }, (err) => next(err))
+        }
+        else {
+          err = new Error("Leaders " + req.params.leaderId + " not found")
+          err.statusCode = 404;
+          return next(err);
+        }
+      })
+      .catch((err) => next(err))
   })
 
   .delete((req, res, next) => {
-    res.end("Deleting leader : " + req.params.leaderId);
+    Leaders.findByIdAndRemove(req.params.leaderId)
+      .then((leader) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(leader);
+      }, (err) => next(err))
+      .catch((err) => next(err))
   });
 
 

@@ -3,8 +3,6 @@ const bodyParser = require("body-parser");
 
 
 const Promotions = require('../models/promotions');
-const promotions = require("../models/promotions");
-const dishRouter = require("./dishRouter");
 const promoRouter = express.Router();
 promoRouter.use(bodyParser.json());
 
@@ -69,7 +67,7 @@ promoRouter
         next(err))
       .catch((err) => next(err))
   })
-  
+
 
   .post((req, res, next) => {
     res.statusCode = 403;

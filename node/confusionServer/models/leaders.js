@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 require('mongoose-currency').loadType(mongoose);
 
-const Schema = mongoose.Schema();
+
+const Schema = mongoose.Schema;
 
 const leaderSchema = new Schema(
     {
@@ -19,7 +20,7 @@ const leaderSchema = new Schema(
         },
         abbr: {
             type: String,
-            required: true
+            required: true,
         },
         description: {
             type: String,
